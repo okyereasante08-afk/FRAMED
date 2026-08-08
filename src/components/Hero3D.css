@@ -1,0 +1,97 @@
+.hero-right{
+  position:relative;
+  background:
+    linear-gradient(180deg, rgba(10,10,10,0.0) 0%, rgba(10,10,10,0.06) 100%),
+    repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(10,10,10,0.05) 40px),
+    repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(10,10,10,0.05) 40px);
+}
+
+/* Seamless blend: fades the canvas panel's grid into the paper tone
+   of the left panel instead of a hard dividing line. This is the
+   signature fix -- no border-left, just a soft gradient handoff. */
+.hero-right::before{
+  content:'';
+  position:absolute; inset:0;
+  z-index:2;
+  pointer-events:none;
+  background:linear-gradient(90deg,
+    var(--paper) 0%,
+    rgba(242,240,234,0.85) 6%,
+    rgba(242,240,234,0.35) 14%,
+    rgba(242,240,234,0) 26%
+  );
+}
+
+.hero-3d-canvas{ position:absolute; inset:0; touch-action:none; }
+
+.canvas-hint{
+  position:absolute;
+  bottom:28px; right:28px;
+  font-family:'JetBrains Mono', monospace;
+  font-size:11px;
+  letter-spacing:0.08em;
+  color:var(--steel-light);
+  text-align:right;
+  line-height:1.6;
+  z-index:5;
+  pointer-events:none;
+}
+.canvas-hint b{ color:var(--ink); }
+
+.axis-tag{
+  position:absolute; top:28px; left:28px;
+  font-family:'JetBrains Mono', monospace;
+  font-size:11px;
+  letter-spacing:0.1em;
+  color:var(--steel-light);
+  z-index:5;
+}
+.axis-tag .n{ color:var(--ink); font-weight:700; }
+
+.scroll-cue{
+  position:absolute; bottom:26px; left:48px;
+  display:flex; align-items:center; gap:12px;
+  font-family:'JetBrains Mono', monospace;
+  font-size:11px;
+  letter-spacing:0.15em;
+  color:var(--steel-light);
+  z-index:5;
+}
+.scroll-cue .rail{
+  width:1px; height:34px; background:var(--line-strong);
+  position:relative; overflow:hidden;
+}
+.scroll-cue .rail::after{
+  content:'';
+  position:absolute; top:-100%; left:0; width:100%; height:100%;
+  background:var(--safety);
+  animation:railDrop 1.8s ease-in-out infinite;
+}
+@keyframes railDrop{ 0%{ top:-100%; } 100%{ top:100%; } }
+
+/* CC-BY-4.0 attribution, required by the model license. Centered at the
+   very bottom, small and unobtrusive, clear of both canvas-hint
+   (bottom-right) and scroll-cue (bottom-left). */
+.model-credit{
+  position:absolute;
+  bottom:8px; left:0; right:0;
+  text-align:center;
+  font-family:'JetBrains Mono', monospace;
+  font-size:9px;
+  letter-spacing:0.03em;
+  color:var(--steel-light);
+  opacity:0.6;
+  z-index:5;
+  pointer-events:none;
+}
+
+@media (max-width:900px){
+  .hero-right::before{
+    background:linear-gradient(180deg,
+      var(--paper) 0%,
+      rgba(242,240,234,0.85) 6%,
+      rgba(242,240,234,0.35) 14%,
+      rgba(242,240,234,0) 26%
+    );
+  }
+}

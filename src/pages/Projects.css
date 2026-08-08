@@ -1,0 +1,346 @@
+.projects-hero{
+  padding:150px 48px 40px;
+  border-bottom:1px solid var(--line-strong);
+}
+.projects-hero .eyebrow{
+  font-family:'JetBrains Mono', monospace;
+  font-size:12px;
+  letter-spacing:0.22em;
+  color:var(--safety-dim);
+  margin-bottom:18px;
+  display:flex; align-items:center; gap:10px;
+}
+.projects-hero .eyebrow::before{ content:''; width:26px; height:1px; background:var(--safety-dim); }
+.projects-hero h1{ font-size:clamp(38px, 6vw, 72px); max-width:14ch; }
+.projects-hero p{
+  margin-top:18px;
+  color:var(--steel);
+  font-weight:300;
+  max-width:52ch;
+  font-size:16px;
+}
+
+/* Filter bar */
+.track-filter{
+  display:flex; gap:0;
+  border-top:1px solid var(--line-strong);
+  border-bottom:1px solid var(--line-strong);
+  flex-wrap:wrap;
+}
+.track-filter button{
+  font-family:'JetBrains Mono', monospace;
+  font-size:12px;
+  letter-spacing:0.14em;
+  padding:16px 28px;
+  background:transparent;
+  border:none;
+  border-right:1px solid var(--line-strong);
+  color:var(--steel);
+  cursor:pointer;
+  transition:background 0.25s ease, color 0.25s ease;
+}
+.track-filter button:hover{ background:var(--paper-dim); color:var(--ink); }
+.track-filter button.active{ background:var(--ink); color:var(--paper); }
+
+/* Horizontal scroll gallery -- the section reads L-to-R even while the
+   page scrolls vertically, via a wheel-delta hijack (see Projects.jsx) */
+.gallery-wrap{
+  position:relative;
+  border-bottom:1px solid var(--line-strong);
+  background:var(--paper-dim);
+}
+.gallery-hint{
+  position:absolute; top:22px; right:48px;
+  font-family:'JetBrains Mono', monospace;
+  font-size:11px;
+  letter-spacing:0.1em;
+  color:var(--steel-light);
+  z-index:5;
+  display:flex; align-items:center; gap:10px;
+}
+.gallery-hint .arrow-cue{ display:inline-flex; gap:3px; }
+.gallery-hint .arrow-cue span{ animation:arrowPulse 1.6s ease-in-out infinite; }
+.gallery-hint .arrow-cue span:nth-child(2){ animation-delay:0.15s; }
+.gallery-hint .arrow-cue span:nth-child(3){ animation-delay:0.3s; }
+@keyframes arrowPulse{ 0%,100%{ opacity:0.25; } 50%{ opacity:1; } }
+
+.gallery{
+  display:flex;
+  gap:0;
+  overflow-x:auto;
+  overflow-y:hidden;
+  scroll-snap-type:x proximity;
+  padding:80px 48px 60px;
+  scrollbar-width:thin;
+  scrollbar-color:var(--ink) transparent;
+}
+.gallery::-webkit-scrollbar{ height:6px; }
+.gallery::-webkit-scrollbar-thumb{ background:var(--ink); }
+.gallery::-webkit-scrollbar-track{ background:transparent; }
+
+/* Card styled after the reference: full-bleed photo, dark gradient
+   scrim, name + description stacked at the bottom, pill meta chips,
+   solid pill CTA. No boxy outline border. */
+.proj-card{
+  position:relative;
+  flex:0 0 auto;
+  width:min(78vw, 380px);
+  height:520px;
+  margin-right:28px;
+  border-radius:28px;
+  overflow:hidden;
+  scroll-snap-align:start;
+  text-decoration:none;
+  color:#fff;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  padding:26px;
+  cursor:pointer;
+  box-shadow:0 18px 44px rgba(10,10,10,0.28);
+  transition:transform 0.4s cubic-bezier(.19,1,.22,1);
+}
+.proj-card:hover{ transform:translateY(-8px); }
+
+.proj-card .card-bg{
+  position:absolute; inset:0;
+  z-index:0;
+}
+.proj-card .card-scrim{
+  position:absolute; inset:0;
+  z-index:1;
+  background:linear-gradient(180deg,
+    rgba(0,0,0,0.05) 0%,
+    rgba(0,0,0,0.08) 35%,
+    rgba(0,0,0,0.55) 72%,
+    rgba(0,0,0,0.86) 100%
+  );
+}
+
+.proj-card .card-top{
+  position:relative; z-index:3;
+  display:flex; justify-content:space-between; align-items:flex-start;
+}
+.proj-card .track-pill{
+  font-family:'JetBrains Mono', monospace;
+  font-size:11px;
+  letter-spacing:0.12em;
+  padding:7px 14px;
+  border-radius:100px;
+  background:rgba(255,255,255,0.14);
+  backdrop-filter:blur(6px);
+  border:1px solid rgba(255,255,255,0.25);
+}
+.proj-card .year-tag{
+  font-family:'JetBrains Mono', monospace;
+  font-size:11px;
+  color:rgba(255,255,255,0.7);
+}
+
+.proj-card .card-body{ position:relative; z-index:3; }
+.proj-card h3{
+  font-size:26px;
+  line-height:1.02;
+  margin-bottom:10px;
+}
+.proj-card p{
+  font-family:'Oswald', sans-serif;
+  font-weight:300;
+  font-size:13.5px;
+  line-height:1.5;
+  color:rgba(255,255,255,0.88);
+  max-width:32ch;
+  margin-bottom:16px;
+}
+.proj-card .meta-row{
+  display:flex; gap:8px; flex-wrap:wrap;
+  margin-bottom:18px;
+}
+.proj-card .meta-chip{
+  font-family:'JetBrains Mono', monospace;
+  font-size:10.5px;
+  letter-spacing:0.06em;
+  padding:5px 11px;
+  border-radius:100px;
+  background:rgba(255,255,255,0.12);
+  color:rgba(255,255,255,0.92);
+}
+.proj-card .card-cta{
+  background:#fff;
+  color:var(--ink);
+  font-family:'Oswald', sans-serif;
+  font-weight:600;
+  font-size:12.5px;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  padding:13px 0;
+  border-radius:100px;
+  text-align:center;
+  transition:background 0.25s ease, color 0.25s ease;
+}
+.proj-card:hover .card-cta{ background:var(--safety); color:#fff; }
+
+.proj-card.feat-explode .card-top::after{
+  content:'EXPLODED VIEW';
+  font-family:'JetBrains Mono', monospace;
+  font-size:9.5px;
+  letter-spacing:0.1em;
+  color:rgba(255,255,255,0.55);
+  align-self:flex-end;
+}
+.proj-card.feat-xr .card-top::after{
+  content:'WEBXR WALKTHROUGH';
+  font-family:'JetBrains Mono', monospace;
+  font-size:9.5px;
+  letter-spacing:0.1em;
+  color:rgba(255,255,255,0.55);
+  align-self:flex-end;
+}
+
+/* Procedural gradient backgrounds per track (placeholder photography) */
+.card-bg.bg-cad{ background:radial-gradient(120% 120% at 20% 15%, #2c2c2c 0%, #0c0c0c 60%), linear-gradient(160deg, #1a1a1a, #050505); }
+.card-bg.bg-cfd{ background:radial-gradient(120% 120% at 25% 10%, #0f3a5c 0%, #04101d 65%), linear-gradient(160deg, #0a2438, #020a13); }
+.card-bg.bg-cae{ background:radial-gradient(120% 120% at 22% 12%, #5c1010 0%, #160404 65%), linear-gradient(160deg, #2b0808, #0a0202); }
+
+/* ===== EXPLODED VIEW SECTION ===== */
+.explode-section{
+  border-bottom:1px solid var(--line-strong);
+  padding:100px 48px;
+  background:var(--ink);
+  color:var(--paper);
+}
+.explode-head{ max-width:640px; margin-bottom:56px; }
+.explode-head .eyebrow{
+  font-family:'JetBrains Mono', monospace;
+  font-size:12px;
+  letter-spacing:0.2em;
+  color:var(--cae-c);
+  margin-bottom:16px;
+}
+.explode-head h2{ font-size:clamp(30px, 4.4vw, 52px); }
+.explode-head p{ margin-top:16px; color:rgba(242,240,234,0.7); font-weight:300; max-width:56ch; }
+
+.explode-stage{
+  position:relative;
+  display:grid;
+  grid-template-columns:1fr 320px;
+  gap:40px;
+  align-items:center;
+}
+.explode-canvas-wrap{
+  position:relative;
+  height:520px;
+  border:1px solid rgba(242,240,234,0.15);
+  border-radius:4px;
+  overflow:hidden;
+  background:
+    repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(242,240,234,0.04) 40px),
+    repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(242,240,234,0.04) 40px);
+}
+.explode-controls{ display:flex; flex-direction:column; gap:20px; }
+.explode-btn{
+  font-family:'Oswald', sans-serif;
+  font-weight:600;
+  font-size:14px;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  padding:18px 24px;
+  background:var(--cae-c);
+  color:#fff;
+  border:none;
+  cursor:pointer;
+  display:flex; align-items:center; justify-content:space-between;
+  transition:background 0.25s ease, transform 0.2s ease;
+}
+.explode-btn:hover{ background:#ff6a6a; transform:translateY(-2px); }
+.explode-btn:active{ transform:translateY(0); }
+.explode-readout{
+  font-family:'JetBrains Mono', monospace;
+  font-size:12px;
+  letter-spacing:0.08em;
+  color:rgba(242,240,234,0.55);
+  line-height:1.8;
+}
+.explode-readout b{ color:var(--paper); }
+.explode-slider-row{ display:flex; flex-direction:column; gap:8px; }
+.explode-slider-row label{
+  font-family:'JetBrains Mono', monospace;
+  font-size:11px;
+  letter-spacing:0.1em;
+  color:rgba(242,240,234,0.55);
+}
+.explode-slider-row input[type="range"]{
+  accent-color:var(--cae-c);
+  width:100%;
+}
+
+/* ===== WEBXR SECTION ===== */
+.xr-section{
+  padding:100px 48px 120px;
+}
+.xr-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:0;
+  border:1px solid var(--line-strong);
+}
+.xr-panel{
+  padding:56px;
+  border-right:1px solid var(--line-strong);
+  display:flex; flex-direction:column; justify-content:space-between;
+  min-height:420px;
+}
+.xr-panel:last-child{ border-right:none; }
+.xr-panel .tag{
+  font-family:'JetBrains Mono', monospace;
+  font-size:11px;
+  letter-spacing:0.14em;
+  padding:6px 14px;
+  border:1px solid var(--line-strong);
+  display:inline-block;
+  width:fit-content;
+  margin-bottom:24px;
+}
+.xr-panel h3{ font-size:clamp(24px, 3vw, 34px); margin-bottom:14px; }
+.xr-panel p{ color:var(--steel); font-weight:300; font-size:14.5px; max-width:38ch; margin-bottom:28px; }
+
+.xr-panel.walkthrough{ background:var(--paper); }
+.xr-panel.walkthrough .tag{ border-color:var(--cad-c); color:#8a6000; }
+
+.xr-panel.ar{ background:var(--paper-dim); }
+.xr-panel.ar .tag{ border-color:var(--cfd-c); color:#1a5a8a; }
+
+.qr-block{
+  display:flex; align-items:center; gap:20px;
+  padding:20px;
+  background:#fff;
+  border:1px solid var(--line);
+}
+.qr-code{
+  width:88px; height:88px;
+  background:
+    linear-gradient(90deg, #0a0a0a 0 15%, transparent 15% 20%, #0a0a0a 20% 35%, transparent 35% 45%, #0a0a0a 45% 55%, transparent 55% 65%, #0a0a0a 65% 80%, transparent 80% 85%, #0a0a0a 85%),
+    repeating-linear-gradient(0deg, #0a0a0a 0 4px, transparent 4px 8px);
+  background-blend-mode:multiply;
+  flex-shrink:0;
+  border:6px solid #fff;
+  outline:1px solid var(--line);
+}
+.qr-block .qr-copy{
+  font-family:'JetBrains Mono', monospace;
+  font-size:11.5px;
+  letter-spacing:0.04em;
+  color:var(--steel);
+  line-height:1.6;
+}
+
+@media (max-width:900px){
+  .projects-hero{ padding:130px 24px 32px; }
+  .gallery{ padding:56px 24px 40px; }
+  .explode-section, .xr-section{ padding:64px 24px; }
+  .explode-stage{ grid-template-columns:1fr; }
+  .explode-canvas-wrap{ height:360px; }
+  .xr-grid{ grid-template-columns:1fr; }
+  .xr-panel{ border-right:none; border-bottom:1px solid var(--line-strong); padding:36px 24px; }
+  .track-filter button{ padding:14px 18px; font-size:11px; }
+}
