@@ -1,106 +1,114 @@
 .tracks{
   display:grid;
   grid-template-columns:repeat(3, 1fr);
-  min-height:88vh;
-  border-top:1px solid var(--line-strong);
+  gap:16px;
+  min-height:74vh;
+  padding:0 16px;
 }
 .track{
   position:relative;
-  border-right:1px solid var(--line-strong);
   display:flex; flex-direction:column; justify-content:flex-end;
-  padding:44px;
+  padding:36px;
   overflow:hidden;
   cursor:pointer;
-  background:var(--paper);
-  transition:background 1.1s ease;
+  background:var(--clay-surface);
+  border-radius:28px;
+  box-shadow:
+    9px 9px 18px var(--clay-shadow-dark),
+    -9px -9px 18px var(--clay-shadow-light);
+  transition:background 0.6s ease, box-shadow 0.3s ease;
   text-decoration:none;
 }
-.track:last-child{ border-right:none; }
+.track:hover{
+  box-shadow:
+    12px 12px 24px var(--clay-shadow-darker),
+    -9px -9px 18px var(--clay-shadow-light);
+}
 
 .track-num{
   font-family:'JetBrains Mono', monospace;
   font-size:12px;
-  letter-spacing:0.12em;
+  letter-spacing:0.06em;
   color:var(--steel-light);
-  position:absolute; top:36px; left:44px;
+  position:absolute; top:32px; left:32px;
   z-index:3;
   transition:color 0.6s ease;
 }
 .track-tag{
   font-family:'JetBrains Mono', monospace;
   font-size:11px;
-  letter-spacing:0.14em;
-  position:absolute; top:36px; right:44px;
+  letter-spacing:0.06em;
+  position:absolute; top:32px; right:32px;
   z-index:3;
-  padding:5px 12px;
-  border:1px solid var(--line-strong);
+  padding:6px 14px;
+  border-radius:100px;
+  background:var(--clay-bg);
+  color:var(--steel);
   transition:all 0.6s ease;
 }
 .track-title{
-  font-size:clamp(30px, 3.4vw, 46px);
+  font-size:clamp(26px, 3vw, 38px);
   position:relative; z-index:3;
   transition:color 0.6s ease;
 }
 .track-sub{
-  font-family:'Oswald', sans-serif;
+  font-family:'Roboto', sans-serif;
   font-weight:300;
-  font-size:14px;
+  font-size:14.5px;
   max-width:30ch;
   margin-top:12px;
-  color:var(--steel);
+  line-height:1.55;
+  color:var(--ink-soft);
   position:relative; z-index:3;
   transition:color 0.6s ease;
 }
 .track-full{
-  font-family:'Oswald', sans-serif;
-  font-weight:500;
-  font-size:12px;
-  letter-spacing:0.16em;
+  font-family:'Roboto', sans-serif;
+  font-weight:600;
+  font-size:13px;
   margin-top:22px;
   display:flex; align-items:center; gap:8px;
   position:relative; z-index:3;
-  color:var(--steel);
+  color:var(--primary);
   transition:color 0.6s ease;
 }
 
-/* CAD track hover */
-.track.cad.active{ background:#0c0c0c; }
-.track.cad.active .track-title,
-.track.cad.active .track-sub,
-.track.cad.active .track-full,
-.track.cad.active .track-num{ color:#fff; }
-.track.cad.active .track-tag{ border-color:var(--cad-c); color:var(--cad-c); }
+/* Active/hover state: all three tracks share the same dark technical
+   panel treatment (rather than three separate near-black shades as
+   before) since --tech-panel is now the one consistent "technical
+   moment" surface in the identity. The per-track accent color (from
+   the blue/burgundy family) still differentiates them via the tag
+   pill and title color. */
+.track.active{
+  background:var(--tech-panel);
+  box-shadow:
+    9px 9px 18px var(--clay-shadow-dark),
+    -9px -9px 18px var(--clay-shadow-light);
+}
+.track.active .track-num{ color:#8a9ac2; }
+.track.active .track-sub{ color:#a8b5d6; }
+.track.active .track-full{ color:#fff; }
 
-/* CFD track hover */
-.track.cfd.active{ background:#04101d; }
-.track.cfd.active .track-title,
-.track.cfd.active .track-sub,
-.track.cfd.active .track-full,
-.track.cfd.active .track-num{ color:#fff; }
-.track.cfd.active .track-tag{ border-color:var(--cfd-c); color:var(--cfd-c); }
+.track.cad.active .track-title{ color:var(--cad-c); }
+.track.cad.active .track-tag{ background:var(--tech-panel-line); color:var(--cad-c); }
 
-/* CAE track hover */
-.track.cae.active{ background:#160404; }
-.track.cae.active .track-title,
-.track.cae.active .track-sub,
-.track.cae.active .track-full,
-.track.cae.active .track-num{ color:#fff; }
-.track.cae.active .track-tag{ border-color:var(--cae-c); color:var(--cae-c); }
+.track.cfd.active .track-title{ color:var(--cfd-c); }
+.track.cfd.active .track-tag{ background:var(--tech-panel-line); color:#7d9aeb; }
 
-/* live 3D canvases (CAD assembly, CAE engine) -- mounted only while the
-   tile is active, so this fades in on mount rather than toggling via
-   a hover-driven opacity switch on an always-present element */
+.track.cae.active .track-title{ color:var(--cae-c); }
+.track.cae.active .track-tag{ background:var(--tech-panel-line); color:#d68a99; }
+
+/* live 3D canvases (CAD assembly, CFD nozzle, CAE drag plane) -- mounted
+   only while the tile is active, so this fades in on mount rather than
+   toggling via a hover-driven opacity switch on an always-present
+   element */
 .track-3d{
   position:absolute; inset:0; z-index:1;
   animation:tile3dFadeIn 0.45s ease forwards;
 }
 @keyframes tile3dFadeIn{ from{ opacity:0; } to{ opacity:1; } }
 
-/* fluid sim (CFD) */
-/* CFD tile now uses .track-3d (NozzleFlow), same as CAD/CAE --
-   the old 2D canvas-based fluid-canvas rule is no longer needed */
-
 @media (max-width:900px){
-  .tracks{ grid-template-columns:1fr; }
-  .track{ border-right:none; border-bottom:1px solid var(--line-strong); min-height:50vh; }
+  .tracks{ grid-template-columns:1fr; gap:16px; }
+  .track{ min-height:44vh; }
 }

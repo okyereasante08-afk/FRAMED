@@ -85,7 +85,7 @@ export default function About(){
     <>
       <section className="about-hero">
         <p className="eyebrow mono">THE ROSTER</p>
-        <h1>MEET THE TEAM<br />BEHIND THE MODELS.</h1>
+        <h1>Meet the team<br />behind the models.</h1>
         <p>
           Engineers, not mascots. Stats are earned, weaknesses are real, and
           every one of us picks up sessions with students.
@@ -99,7 +99,7 @@ export default function About(){
       </section>
 
       <section className="about-body-band">
-        <h2>WE MENTOR AS MUCH AS WE BUILD.</h2>
+        <h2>We mentor as much as we build.</h2>
         <div className="copy">
           <p>
             Forge &amp; Frame started as a way to make real CAD, CFD, and CAE

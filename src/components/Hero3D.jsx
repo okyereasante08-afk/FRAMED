@@ -36,15 +36,25 @@ export default function Hero3D(){
           <Suspense fallback={<ModelLoadingFallback />}>
             <PorscheModel />
           </Suspense>
-          {/* Model now sits on the ground plane (y=0 at its base) rather
-              than centered at origin, so the shadow plane matches that
-              instead of the old centered-model offset (-0.9). */}
-          <ContactShadows position={[0, 0, 0]} opacity={0.5} scale={8} blur={2.4} far={2} />
+          {/* Model now sits on the ground plane (y=0 at its base). The
+              shadow plane sits slightly BELOW that (-0.015) rather than
+              exactly coplanar -- at y=0 it was z-fighting with the car's
+              wheel-contact geometry, which is what produced the solid
+              black diamond artifact seen in the live preview. */}
+          <ContactShadows position={[0, -0.015, 0]} opacity={0.45} scale={8} blur={2.6} far={2} />
           <Environment preset="city" />
           <OrbitControls
             enablePan
-            enableZoom
             enableRotate
+            // Wheel-zoom deliberately OFF: this canvas sits inline in a
+            // normal scrolling page, and OrbitControls captures the
+            // mouse wheel for camera zoom by default -- which means
+            // anyone scrolling the page while their cursor happens to
+            // be over the hero gets stuck zooming the car instead of
+            // scrolling, which is what felt "weird" in the live
+            // preview. Drag-to-orbit and touch still work fully; only
+            // the wheel-zoom binding is removed.
+            enableZoom={false}
             minDistance={2.4}
             maxDistance={8}
             // target y is an ESTIMATE (~1/8 of the 2.8-unit target length,
@@ -60,9 +70,9 @@ export default function Hero3D(){
       </div>
 
       <p className="canvas-hint">
-        LMB <b>ORBIT</b> · RMB <b>PAN</b>
+        Drag to <b>orbit</b> · Right-click to <b>pan</b>
         <br />
-        SCROLL <b>ZOOM</b> · TOUCH <b>ROTATE</b>
+        Touch to <b>rotate</b>
       </p>
 
       <div className="scroll-cue">

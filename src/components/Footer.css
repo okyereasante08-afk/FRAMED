@@ -1,11 +1,10 @@
 .site-footer{
-  border-top:1px solid var(--line-strong);
-  padding:22px 48px;
+  padding:24px 48px;
   display:flex; justify-content:space-between;
   flex-wrap:wrap;
   gap:10px;
   font-family:'JetBrains Mono', monospace;
   font-size:11px;
-  letter-spacing:0.08em;
+  letter-spacing:0.04em;
   color:var(--steel-light);
 }

@@ -1,41 +1,93 @@
 :root{
-  --ink:#0a0a0a;
-  --paper:#f2f0ea;
-  --paper-dim:#e6e3da;
-  --steel:#3a3d3f;
-  --steel-light:#6b6f72;
-  --line:#c9c5b8;
-  --line-strong:#0a0a0a;
-  --safety:#ff4b1f;
-  --safety-dim:#c93a17;
-  --cad-c:#ffb400;
-  --cfd-c:#2ea6ff;
-  --cae-c:#ff4b4b;
+  /* Claymorphic surfaces -- cool blue-toned, not white/gray, so the
+     soft shadows read as "clay" rather than a generic light-mode UI */
+  --clay-bg:#e8eef9;
+  --clay-bg-deep:#dbe4f5;
+  --clay-surface:#f3f7fd;
+  --clay-surface-raised:#fbfdff;
+
+  /* Claymorphism's defining trait: shadows are colored (cool blue-gray
+     dark side, white-ish light side), never pure black -- that's what
+     separates it from a flat drop-shadow card */
+  --clay-shadow-dark:#a9bcdc;
+  --clay-shadow-darker:#8ba3cc;
+  --clay-shadow-light:#ffffff;
+
+  --ink:#1e2a3f;          /* body text -- softened near-navy, not pure black */
+  --ink-soft:#4a5872;
+  --steel:#6b7a94;        /* muted labels/secondary text */
+  --steel-light:#93a1b8;
+
+  --primary:#3b5fcc;      /* blue -- primary actions, active states */
+  --primary-deep:#2c47a3;
+  --primary-tint:#dde6fb;
+
+  --accent:#7a2e3d;       /* burgundy -- CTAs, highlights, emphasis */
+  --accent-deep:#5c2130;
+  --accent-tint:#f3dde1;
+
+  /* Dark technical panel -- the one deliberate holdover from the old
+     identity, reserved specifically for monospace data (specs, coords,
+     timestamps) per the brief. Everything else drops the hard/technical
+     look entirely. */
+  --tech-panel:#1a2540;
+  --tech-panel-line:#324066;
+
+  /* Per-discipline accent tints, derived from the blue/burgundy family
+     so the three service tracks (CAD/CFD/CAE) stay visually cohesive
+     with the rest of the identity rather than reusing the old
+     amber/cyan/red trio, which clashed with the new palette. */
+  --cad-c:#5b7fe0;   /* lighter blue */
+  --cfd-c:#3b5fcc;   /* primary blue */
+  --cae-c:#a3475a;   /* lighter burgundy */
 }
 
 *{ box-sizing:border-box; margin:0; padding:0; }
 html{ scroll-behavior:smooth; }
 body{
-  background:var(--paper);
+  background:var(--clay-bg);
   color:var(--ink);
-  font-family:'Oswald', sans-serif;
+  font-family:'Roboto', sans-serif;
   overflow-x:hidden;
 }
-::selection{ background:var(--safety); color:var(--paper); }
+::selection{ background:var(--accent-tint); color:var(--accent-deep); }
 
 h1,h2,h3,.display{
-  font-family:'Anton', sans-serif;
-  text-transform:uppercase;
-  letter-spacing:0.01em;
-  line-height:0.92;
+  font-family:'Syne', sans-serif;
+  font-weight:700;
+  letter-spacing:-0.01em;
+  line-height:1.05;
 }
 .mono{ font-family:'JetBrains Mono', monospace; }
 
 a{ color:inherit; }
 
-/* Baseline text animation -- the signature motif of the site.
-   A ruled line draws in under key text on load or hover, echoing
-   a technical drawing's dimension line / datum. */
+/* ===== Claymorphism core: puffy surface with dual soft shadow ===== */
+.clay{
+  background:var(--clay-surface);
+  border-radius:28px;
+  box-shadow:
+    9px 9px 18px var(--clay-shadow-dark),
+    -9px -9px 18px var(--clay-shadow-light);
+}
+.clay-inset{
+  background:var(--clay-bg);
+  border-radius:20px;
+  box-shadow:
+    inset 5px 5px 10px var(--clay-shadow-dark),
+    inset -5px -5px 10px var(--clay-shadow-light);
+}
+.clay-raised{
+  background:var(--clay-surface-raised);
+  border-radius:28px;
+  box-shadow:
+    12px 12px 24px var(--clay-shadow-dark),
+    -12px -12px 24px var(--clay-shadow-light);
+}
+
+/* Baseline text animation -- signature motif retained from the old
+   identity but restyled: a soft rounded pill of color draws in behind
+   key text rather than a hard ruled line, matching the puffy language */
 .baseline{
   position:relative;
   display:inline-block;
@@ -43,54 +95,71 @@ a{ color:inherit; }
 .baseline::after{
   content:'';
   position:absolute;
-  left:0; bottom:-0.06em;
-  height:3px;
+  left:-4px; right:-4px; bottom:-0.08em;
+  height:0.34em;
+  border-radius:100px;
+  background:var(--accent-tint);
+  z-index:-1;
   width:0%;
-  background:var(--safety);
-  transition:width 1.1s cubic-bezier(.19,1,.22,1);
+  transition:width 0.9s cubic-bezier(.19,1,.22,1);
 }
-.baseline.draw::after{ width:100%; }
+.baseline.draw::after{ width:calc(100% + 8px); }
 
-/* Grain overlay for texture, applied once at app root */
+/* Subtle grain, much lower opacity than before -- claymorphism wants
+   clean soft surfaces, this just keeps the bg from feeling flat/sterile */
 .grain{
   position:fixed; inset:0;
   pointer-events:none;
   z-index:9999;
-  opacity:0.035;
+  opacity:0.018;
   mix-blend-mode:multiply;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 .btn{
-  font-family:'Oswald', sans-serif;
+  font-family:'Roboto', sans-serif;
   font-weight:600;
-  font-size:13px;
-  letter-spacing:0.14em;
-  text-transform:uppercase;
-  padding:16px 30px;
-  border:2px solid var(--ink);
-  background:var(--ink);
-  color:var(--paper);
+  font-size:14px;
+  letter-spacing:0.01em;
+  padding:16px 32px;
+  border:none;
+  border-radius:100px;
+  background:var(--primary);
+  color:#fff;
   text-decoration:none;
   display:inline-flex;
   align-items:center;
   gap:10px;
   cursor:pointer;
-  transition:background 0.25s ease, color 0.25s ease, transform 0.2s ease;
+  box-shadow:
+    6px 6px 14px var(--clay-shadow-dark),
+    -6px -6px 14px var(--clay-shadow-light);
+  transition:transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
 }
-.btn:hover{ background:var(--paper); color:var(--ink); transform:translateY(-2px); }
-.btn.ghost{ background:transparent; color:var(--ink); }
-.btn.ghost:hover{ background:var(--ink); color:var(--paper); }
+.btn:hover{
+  transform:translateY(-2px);
+  box-shadow:
+    8px 8px 18px var(--clay-shadow-darker),
+    -6px -6px 16px var(--clay-shadow-light);
+}
+.btn:active{ transform:translateY(0); }
+.btn.ghost{
+  background:var(--clay-surface);
+  color:var(--ink);
+}
+.btn.ghost:hover{ background:var(--clay-surface-raised); }
+.btn.accent{ background:var(--accent); }
+.btn.accent:hover{ background:var(--accent-deep); }
 .btn:focus-visible, a:focus-visible, button:focus-visible{
-  outline:2px solid var(--safety);
+  outline:2px solid var(--primary);
   outline-offset:3px;
 }
 .btn:disabled{
-  opacity:0.4;
+  opacity:0.45;
   cursor:not-allowed;
   transform:none !important;
+  box-shadow:none;
 }
-.btn:disabled:hover{ background:var(--ink); color:var(--paper); }
 
 @media (prefers-reduced-motion: reduce){
   *{ animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; scroll-behavior:auto !important; }

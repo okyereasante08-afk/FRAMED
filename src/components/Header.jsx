@@ -12,14 +12,14 @@ export default function Header(){
       </NavLink>
 
       <button className="nav-toggle" onClick={() => setOpen(o => !o)} aria-label="Toggle menu" aria-expanded={open}>
-        {open ? 'CLOSE' : 'MENU'}
+        {open ? 'Close' : 'Menu'}
       </button>
 
       <nav className={open ? 'open' : ''}>
-        <NavLink to="/about" onClick={() => setOpen(false)}>ABOUT</NavLink>
-        <NavLink to="/projects" onClick={() => setOpen(false)}>PROJECTS</NavLink>
-        <NavLink to="/student-help" onClick={() => setOpen(false)}>STUDENT HELP</NavLink>
-        <NavLink to="/contact" onClick={() => setOpen(false)}>CONTACT</NavLink>
+        <NavLink to="/about" onClick={() => setOpen(false)}>About</NavLink>
+        <NavLink to="/projects" onClick={() => setOpen(false)}>Projects</NavLink>
+        <NavLink to="/student-help" onClick={() => setOpen(false)}>Student Help</NavLink>
+        <NavLink to="/contact" onClick={() => setOpen(false)}>Contact</NavLink>
       </nav>
     </header>
   )

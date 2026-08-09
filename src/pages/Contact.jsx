@@ -44,7 +44,7 @@ export default function Contact(){
     <>
       <section className="contact-hero">
         <p className="eyebrow mono">START A PROJECT</p>
-        <h1>LET&apos;S TALK ABOUT<br />WHAT YOU&apos;RE BUILDING.</h1>
+        <h1>Let&apos;s talk about<br />what you&apos;re building.</h1>
         <p>
           CAD, CFD, or CAE — tell us where you are and what you need, and
           we&apos;ll get back to you with next steps, not a form-letter reply.
@@ -54,7 +54,7 @@ export default function Contact(){
       <section className="contact-layout">
         <div className="contact-info">
           <div>
-            <h3>DIRECT LINES</h3>
+            <h3>Direct lines</h3>
             <p className="lead">
               Prefer to skip the form? Reach out directly and we&apos;ll route
               you to the right person on the team.
@@ -84,7 +84,7 @@ export default function Contact(){
           {submitted ? (
             <div className="cf-success">
               <div className="mark">✓</div>
-              <h3>MESSAGE SENT.</h3>
+              <h3>Message sent.</h3>
               <p>We&apos;ll get back to you within 2 business days.</p>
             </div>
           ) : (
@@ -130,7 +130,7 @@ export default function Contact(){
               </div>
 
               <button className="cf-submit" type="submit" disabled={submitting}>
-                {submitting ? 'SENDING…' : 'SEND MESSAGE →'}
+                {submitting ? 'Sending…' : 'Send message →'}
               </button>
             </form>
           )}

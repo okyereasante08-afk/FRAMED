@@ -63,7 +63,7 @@ export default function Projects(){
     <>
       <section className="projects-hero">
         <p className="eyebrow mono">SELECTED WORK</p>
-        <h1>PROJECTS THAT<br />ACTUALLY SHIPPED.</h1>
+        <h1>Projects that<br />actually shipped.</h1>
         <p>
           A working record of CAD, CFD, and CAE engagements — from parametric
           hardware to full simulation studies. Filter by discipline or scroll
@@ -73,7 +73,7 @@ export default function Projects(){
 
       <div className="track-filter">
         <button className={filter === 'all' ? 'active' : ''} onClick={() => setFilter('all')}>
-          ALL WORK ({PROJECTS.length})
+          All work ({PROJECTS.length})
         </button>
         {Object.entries(TRACK_META).map(([key, meta]) => (
           <button
@@ -81,14 +81,14 @@ export default function Projects(){
             className={filter === key ? 'active' : ''}
             onClick={() => setFilter(key)}
           >
-            {meta.label} — {meta.full.toUpperCase()}
+            {meta.label} — {meta.full}
           </button>
         ))}
       </div>
 
       <div className="gallery-wrap">
         <span className="gallery-hint">
-          SCROLL TO BROWSE
+          Scroll to browse
           <span className="arrow-cue"><span>›</span><span>›</span><span>›</span></span>
         </span>
         <div className="gallery" ref={galleryRef}>
@@ -101,7 +101,7 @@ export default function Projects(){
       <section className="explode-section" id="exploded-view">
         <div className="explode-head">
           <p className="eyebrow mono">CAE — INTERACTIVE</p>
-          <h2>WATCH IT COME APART.</h2>
+          <h2>Watch it come apart.</h2>
           <p>
             A live, physically-driven exploded view — drag to orbit, use the
             button or slider to blow the assembly apart and watch every
@@ -116,21 +116,21 @@ export default function Projects(){
           <div className="xr-panel walkthrough">
             <div>
               <span className="tag mono">WEBXR — CAD</span>
-              <h3>WALK THROUGH THE BUILDING.</h3>
+              <h3>Walk through the building.</h3>
               <p>
                 For architectural work, step inside the model itself.
                 First-person navigation, real scale, real light.
               </p>
             </div>
             <button className="btn" disabled title="Requires a real architectural model — connect a project to enable">
-              ENTER WALKTHROUGH →
+              Enter walkthrough →
             </button>
           </div>
 
           <div className="xr-panel ar">
             <div>
               <span className="tag mono">AR — ON-SITE</span>
-              <h3>SCAN IT INTO YOUR ROOM.</h3>
+              <h3>Scan it into your room.</h3>
               <p>
                 Point a phone camera at the QR code below and drop the model
                 into your actual living room at true scale.

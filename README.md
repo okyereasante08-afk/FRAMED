@@ -2,6 +2,49 @@
 
 Product design engineering site — CAD, CFD, CAE. Built with Vite + React 19 + React Three Fiber.
 
+## Design system (current): Claymorphism, blue/burgundy
+
+The visual identity was fully reworked from the original brutalist/technical
+look to a soft claymorphic system, per client feedback after seeing the
+brutalist version live:
+
+- **Palette**: blue-primary (`--primary #3b5fcc`), burgundy accent
+  (`--accent #7a2e3d`), cool blue-toned "clay" surfaces (not white/gray —
+  claymorphism's shadows need a color to bounce off of).
+- **Typography**: Syne (all headings/titles, every size) + Roboto (body
+  copy). JetBrains Mono is intentionally kept, but scoped specifically to
+  technical/data content (specs, coordinates, timestamps, filter-tag
+  labels) per the client's explicit request — it's not used for headlines
+  or body copy anywhere.
+- **Signature surface treatment**: `.clay` / `.clay-raised` / `.clay-inset`
+  utility classes in `global.css` — a puffy rounded surface with a dual
+  soft shadow (cool blue-gray dark side, white light side), never a flat
+  drop-shadow or hard border. Buttons, cards, form fields, and the header
+  all use this.
+- **One deliberate holdover**: `--tech-panel` (a dark navy surface) is the
+  one place the old "technical" feel survives — used for the exploded-view
+  stage, the symptom-checklist band, and other moments that benefit from a
+  darker, denser treatment, always paired with mono type.
+
+### Bugs fixed during this pass (found via live deployment, not this sandbox)
+
+- **Black artifact under the hero car**: `ContactShadows` was positioned
+  exactly coplanar with the car's ground contact point (`y=0` for both),
+  causing GPU z-fighting that rendered as a solid black shape instead of a
+  soft shadow. Fixed by offsetting the shadow plane slightly below
+  (`y=-0.015`).
+- **Scrolling felt broken over the hero**: `OrbitControls`' `enableZoom`
+  captures the mouse wheel for camera zoom by default, which means
+  scrolling the page while the cursor happened to be over the 3D panel
+  zoomed the car instead of scrolling — confirmed via search against
+  known react-three-fiber/drei behavior. Fixed by setting
+  `enableZoom={false}` (drag-to-orbit and touch still work).
+- **Logo/header blocking browser tabs while scrolling**: the header used
+  `mix-blend-mode: difference` to stay readable over both light and dark
+  hero content. This is a fragile technique that can visually glitch
+  against compositing edges. Replaced entirely with a solid claymorphic
+  floating pill header — no blend modes anywhere in the site now.
+
 ## Setup
 
 ```bash

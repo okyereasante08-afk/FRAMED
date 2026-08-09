@@ -97,11 +97,11 @@ export default function StudentHelp(){
       <section className="sh-hero">
         <span className="sh-siren mono"><span className="dot" />INTAKE LINE OPEN</span>
 
-        <span className="sh-eyebrow">FOR FINAL-YEAR ENGINEERING STUDENTS</span>
+        <span className="sh-eyebrow">For final-year engineering students</span>
 
         <h1 className="sh-hook">
-          MESH FAILING?<br />
-          DEADLINE <span className="accent">TOMORROW</span>?
+          Mesh failing?<br />
+          Deadline <span className="accent">tomorrow</span>?
         </h1>
 
         <p className="sh-subhook">
@@ -112,7 +112,7 @@ export default function StudentHelp(){
 
         <div className="sh-cta-row">
           <a href="#intake-form" className="sh-cta-primary">
-            START EMERGENCY INTAKE →
+            Start emergency intake →
           </a>
         </div>
 
@@ -133,7 +133,7 @@ export default function StudentHelp(){
       </section>
 
       <section className="sh-symptoms">
-        <h2>IF ANY OF THIS SOUNDS FAMILIAR, YOU&apos;RE IN THE RIGHT PLACE.</h2>
+        <h2>If any of this sounds familiar, you&apos;re in the right place.</h2>
         <div className="symptom-grid">
           {SYMPTOMS.map(s => (
             <div className="symptom-card" key={s.mark}>
@@ -149,14 +149,14 @@ export default function StudentHelp(){
           className={`sh-tab ${tab === 'emergency' ? 'active' : ''}`}
           onClick={() => setTab('emergency')}
         >
-          EMERGENCY INTAKE
+          Emergency intake
           <span className="tab-sub">Deadline in days or hours</span>
         </button>
         <button
           className={`sh-tab ${tab === 'general' ? 'active' : ''}`}
           onClick={() => setTab('general')}
         >
-          GENERAL STUDENT HELP
+          General student help
           <span className="tab-sub">Mentorship, no fire to put out</span>
         </button>
       </div>
@@ -164,7 +164,7 @@ export default function StudentHelp(){
       <section className="sh-form-section" id="intake-form">
         <div className="sh-form-wrap">
           <div className="sh-form-head">
-            <h2>{tab === 'emergency' ? 'HIGH-PRIORITY INTAKE' : 'BOOK A MENTORSHIP SESSION'}</h2>
+            <h2>{tab === 'emergency' ? 'High-priority intake' : 'Book a mentorship session'}</h2>
             <p>
               {tab === 'emergency'
                 ? 'Give us the real picture. Vague requests take longer to route than specific ones.'
@@ -243,7 +243,7 @@ export default function StudentHelp(){
             </div>
 
             <button className="sh-submit" type="submit" disabled={submitting}>
-              {submitting ? 'SENDING…' : tab === 'emergency' ? 'SEND EMERGENCY INTAKE →' : 'REQUEST A SESSION →'}
+              {submitting ? 'Sending…' : tab === 'emergency' ? 'Send emergency intake →' : 'Request a session →'}
             </button>
           </form>
         </div>

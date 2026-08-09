@@ -8,16 +8,16 @@ export default function Home(){
     <>
       <section className="hero">
         <div className="hero-left">
-          <p className="eyebrow mono">PRODUCT DESIGN ENGINEERING — CAD / CFD / CAE</p>
+          <p className="eyebrow mono">Product design engineering — CAD / CFD / CAE</p>
           <h1 className="slogan">
-            <span className="line"><span>EXCELLENCE</span></span>
-            <span className="line"><span>ENGINEERED IN</span></span>
-            <span className="line"><span className="baseline draw">EVERY DIMENSION</span></span>
+            <span className="line"><span>Excellence</span></span>
+            <span className="line"><span>engineered in</span></span>
+            <span className="line"><span className="baseline draw">every dimension</span></span>
           </h1>
           <p className="sub-body">Precision, performance, and proven product design.</p>
           <div className="hero-cta">
-            <Link to="/projects" className="btn">View Our Work →</Link>
-            <Link to="/contact" className="btn ghost">Start a Project</Link>
+            <Link to="/projects" className="btn">View our work →</Link>
+            <Link to="/contact" className="btn ghost">Start a project</Link>
           </div>
         </div>
 
@@ -25,9 +25,9 @@ export default function Home(){
       </section>
 
       <div className="brand-strip">
-        <span className="company mono">© FORGE &amp; FRAME — DESIGN OFFICE, EST. GHANA</span>
+        <span className="company">© Forge &amp; Frame — Design office, est. Ghana</span>
         <Link to="/projects" className="work-card">
-          VIEW OUR WORK <span className="arrow">→</span>
+          View our work <span className="arrow">→</span>
         </Link>
       </div>
 
@@ -43,12 +43,12 @@ export default function Home(){
       </div>
 
       <section className="close-band">
-        <h2>LET&apos;S BUILD SOMETHING THAT<br />ACTUALLY <span className="baseline">HOLDS UP.</span></h2>
+        <h2>Let&apos;s build something that<br />actually <span className="baseline">holds up.</span></h2>
         <div className="close-links">
-          <Link to="/projects"><span className="baseline">PROJECTS</span> →</Link>
-          <Link to="/about"><span className="baseline">THE TEAM</span> →</Link>
-          <Link to="/student-help"><span className="baseline">STUDENT DEADLINE?</span> →</Link>
-          <Link to="/contact"><span className="baseline">START A PROJECT</span> →</Link>
+          <Link to="/projects"><span className="baseline">Projects</span> →</Link>
+          <Link to="/about"><span className="baseline">The team</span> →</Link>
+          <Link to="/student-help"><span className="baseline">Student deadline?</span> →</Link>
+          <Link to="/contact"><span className="baseline">Start a project</span> →</Link>
         </div>
       </section>
     </>
