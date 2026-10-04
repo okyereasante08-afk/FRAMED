@@ -1,45 +1,43 @@
 :root{
-  /* Claymorphic surfaces -- cool blue-toned, not white/gray, so the
-     soft shadows read as "clay" rather than a generic light-mode UI */
-  --clay-bg:#e8eef9;
-  --clay-bg-deep:#dbe4f5;
-  --clay-surface:#f3f7fd;
-  --clay-surface-raised:#fbfdff;
+  /* BLUE + WHITE ONLY. No burgundy, no red, no accent color outside
+     this blue family -- per direct client instruction. Every color in
+     the site must trace back to one of these. */
+  --clay-bg:#eaf1fb;
+  --clay-bg-deep:#dbe6f7;
+  --clay-surface:#f5f9ff;
+  --clay-surface-raised:#ffffff;
 
-  /* Claymorphism's defining trait: shadows are colored (cool blue-gray
-     dark side, white-ish light side), never pure black -- that's what
-     separates it from a flat drop-shadow card */
-  --clay-shadow-dark:#a9bcdc;
-  --clay-shadow-darker:#8ba3cc;
+  --clay-shadow-dark:#b8cae6;
+  --clay-shadow-darker:#9bb3d9;
   --clay-shadow-light:#ffffff;
 
-  --ink:#1e2a3f;          /* body text -- softened near-navy, not pure black */
-  --ink-soft:#4a5872;
-  --steel:#6b7a94;        /* muted labels/secondary text */
-  --steel-light:#93a1b8;
+  --ink:#132038;
+  --ink-soft:#3d4f6e;
+  /* Both darkened to actually pass WCAG AA (4.5:1) for small text on
+     --clay-bg -- verified with the real relative-luminance formula,
+     not eyeballed. The original --steel (#5f7191) measured 4.34:1
+     (fails); the original --steel-light (#8ea0bd) measured 2.33:1
+     (fails badly). Tried keeping them as two distinct shades that both
+     pass, but the passing values end up only ~16 RGB-units apart --
+     the same "can't actually tell them apart" territory already found
+     with the old per-field accent colors. Collapsed to one token
+     instead of shipping two colors nobody can distinguish. */
+  --steel:#4c6998;
+  --steel-light:#4c6998;
 
-  --primary:#3b5fcc;      /* blue -- primary actions, active states */
-  --primary-deep:#2c47a3;
-  --primary-tint:#dde6fb;
+  --primary:#2f56c9;
+  --primary-deep:#1f3c99;
+  --primary-tint:#dde8fb;
 
-  --accent:#7a2e3d;       /* burgundy -- CTAs, highlights, emphasis */
-  --accent-deep:#5c2130;
-  --accent-tint:#f3dde1;
+  /* "Accent" now just means a deeper/brighter blue, used sparingly for
+     emphasis -- never a different hue. This replaces the old burgundy
+     --accent entirely. */
+  --accent:#1a3f8f;
+  --accent-deep:#132c66;
+  --accent-tint:#e3ecfb;
 
-  /* Dark technical panel -- the one deliberate holdover from the old
-     identity, reserved specifically for monospace data (specs, coords,
-     timestamps) per the brief. Everything else drops the hard/technical
-     look entirely. */
-  --tech-panel:#1a2540;
-  --tech-panel-line:#324066;
-
-  /* Per-discipline accent tints, derived from the blue/burgundy family
-     so the three service tracks (CAD/CFD/CAE) stay visually cohesive
-     with the rest of the identity rather than reusing the old
-     amber/cyan/red trio, which clashed with the new palette. */
-  --cad-c:#5b7fe0;   /* lighter blue */
-  --cfd-c:#3b5fcc;   /* primary blue */
-  --cae-c:#a3475a;   /* lighter burgundy */
+  --tech-panel:#0f1f42;
+  --tech-panel-line:#1f3566;
 }
 
 *{ box-sizing:border-box; margin:0; padding:0; }
@@ -47,119 +45,79 @@ html{ scroll-behavior:smooth; }
 body{
   background:var(--clay-bg);
   color:var(--ink);
-  font-family:'Roboto', sans-serif;
+  font-family:'Inter', sans-serif;
   overflow-x:hidden;
 }
-::selection{ background:var(--accent-tint); color:var(--accent-deep); }
+::selection{ background:var(--primary-tint); color:var(--primary-deep); }
 
 h1,h2,h3,.display{
-  font-family:'Syne', sans-serif;
+  font-family:'Space Grotesk', sans-serif;
   font-weight:700;
-  letter-spacing:-0.01em;
-  line-height:1.05;
+  line-height:1.15;
 }
 .mono{ font-family:'JetBrains Mono', monospace; }
-
 a{ color:inherit; }
 
-/* ===== Claymorphism core: puffy surface with dual soft shadow ===== */
 .clay{
   background:var(--clay-surface);
   border-radius:28px;
-  box-shadow:
-    9px 9px 18px var(--clay-shadow-dark),
-    -9px -9px 18px var(--clay-shadow-light);
+  box-shadow:9px 9px 18px var(--clay-shadow-dark), -9px -9px 18px var(--clay-shadow-light);
 }
 .clay-inset{
   background:var(--clay-bg);
   border-radius:20px;
-  box-shadow:
-    inset 5px 5px 10px var(--clay-shadow-dark),
-    inset -5px -5px 10px var(--clay-shadow-light);
+  box-shadow:inset 5px 5px 10px var(--clay-shadow-dark), inset -5px -5px 10px var(--clay-shadow-light);
 }
 .clay-raised{
   background:var(--clay-surface-raised);
   border-radius:28px;
-  box-shadow:
-    12px 12px 24px var(--clay-shadow-dark),
-    -12px -12px 24px var(--clay-shadow-light);
+  box-shadow:12px 12px 24px var(--clay-shadow-dark), -12px -12px 24px var(--clay-shadow-light);
 }
 
-/* Baseline text animation -- signature motif retained from the old
-   identity but restyled: a soft rounded pill of color draws in behind
-   key text rather than a hard ruled line, matching the puffy language */
-.baseline{
-  position:relative;
-  display:inline-block;
-}
+.baseline{ position:relative; display:inline-block; }
 .baseline::after{
   content:'';
   position:absolute;
   left:-4px; right:-4px; bottom:-0.08em;
   height:0.34em;
   border-radius:100px;
-  background:var(--accent-tint);
+  background:var(--primary-tint);
   z-index:-1;
   width:0%;
   transition:width 0.9s cubic-bezier(.19,1,.22,1);
 }
 .baseline.draw::after{ width:calc(100% + 8px); }
 
-/* Subtle grain, much lower opacity than before -- claymorphism wants
-   clean soft surfaces, this just keeps the bg from feeling flat/sterile */
 .grain{
   position:fixed; inset:0;
   pointer-events:none;
   z-index:9999;
-  opacity:0.018;
+  opacity:0.015;
   mix-blend-mode:multiply;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 .btn{
-  font-family:'Roboto', sans-serif;
+  font-family:'Inter', sans-serif;
   font-weight:600;
   font-size:14px;
-  letter-spacing:0.01em;
   padding:16px 32px;
   border:none;
   border-radius:100px;
   background:var(--primary);
   color:#fff;
   text-decoration:none;
-  display:inline-flex;
-  align-items:center;
-  gap:10px;
+  display:inline-flex; align-items:center; gap:10px;
   cursor:pointer;
-  box-shadow:
-    6px 6px 14px var(--clay-shadow-dark),
-    -6px -6px 14px var(--clay-shadow-light);
+  box-shadow:6px 6px 14px var(--clay-shadow-dark), -6px -6px 14px var(--clay-shadow-light);
   transition:transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
 }
-.btn:hover{
-  transform:translateY(-2px);
-  box-shadow:
-    8px 8px 18px var(--clay-shadow-darker),
-    -6px -6px 16px var(--clay-shadow-light);
-}
+.btn:hover{ transform:translateY(-2px); box-shadow:8px 8px 18px var(--clay-shadow-darker), -6px -6px 16px var(--clay-shadow-light); }
 .btn:active{ transform:translateY(0); }
-.btn.ghost{
-  background:var(--clay-surface);
-  color:var(--ink);
-}
+.btn.ghost{ background:var(--clay-surface); color:var(--ink); }
 .btn.ghost:hover{ background:var(--clay-surface-raised); }
-.btn.accent{ background:var(--accent); }
-.btn.accent:hover{ background:var(--accent-deep); }
-.btn:focus-visible, a:focus-visible, button:focus-visible{
-  outline:2px solid var(--primary);
-  outline-offset:3px;
-}
-.btn:disabled{
-  opacity:0.45;
-  cursor:not-allowed;
-  transform:none !important;
-  box-shadow:none;
-}
+.btn:focus-visible, a:focus-visible, button:focus-visible{ outline:2px solid var(--primary); outline-offset:3px; }
+.btn:disabled{ opacity:0.45; cursor:not-allowed; transform:none !important; box-shadow:none; }
 
 @media (prefers-reduced-motion: reduce){
   *{ animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; scroll-behavior:auto !important; }

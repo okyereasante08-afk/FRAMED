@@ -1,116 +1,84 @@
-import { useEffect, useRef, useState } from 'react'
-import { TEAM } from '../data/team.js'
+import { useState } from 'react'
+import { TEAM, STATUS_META } from '../data/team.js'
 import './About.css'
 
-const STAT_LABELS = { cad: 'CAD', cfd: 'CFD', cae: 'CAE', speed: 'SPD' }
-
-function TeamCard({ member }){
-  const cardRef = useRef(null)
-  const [visible, setVisible] = useState(false)
-
-  useEffect(() => {
-    const el = cardRef.current
-    if (!el) return
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting){
-          setVisible(true)
-          observer.disconnect()
-        }
-      },
-      { threshold: 0.35 }
-    )
-    observer.observe(el)
-    return () => observer.disconnect()
-  }, [])
-
-  const initials = member.name.split(' ').map(w => w[0]).slice(0, 2).join('')
-
+function StatusDot({ status }){
+  const meta = STATUS_META[status]
   return (
-    <div className="team-card" ref={cardRef}>
-      <div className="tc-portrait">
-        {member.photo ? (
-          <img src={member.photo} alt={member.name} />
-        ) : (
-          <div className="avatar-fallback">{initials}</div>
-        )}
-        <span className="tc-level mono">{member.level}</span>
-        <span className={`tc-track-badge ${member.track} mono`}>{member.track.toUpperCase()}</span>
-        <div className="tc-name-plate">
-          <h3>{member.name}</h3>
-          <p className="role">{member.role}</p>
-        </div>
-      </div>
-
-      <div className="tc-body">
-        <div className="tc-attr-row">
-          <span className="k mono">SPECIALTY</span>
-          <span className="v">{member.specialty}</span>
-        </div>
-        <div className="tc-attr-row weakness">
-          <span className="k mono">WEAKNESS</span>
-          <span className="v">{member.weakness}</span>
-        </div>
-
-        <div className="tc-stats">
-          {Object.entries(member.stats).map(([key, val]) => (
-            <div
-              key={key}
-              className={`tc-stat ${visible ? 'fill-in' : ''}`}
-              style={{ '--stat-val': `${val}%` }}
-            >
-              <span className="label mono">{STAT_LABELS[key]}</span>
-              <div className="track-bar">
-                <div className={`fill ${key}`} />
-              </div>
-              <span className="val mono">{val}</span>
-            </div>
-          ))}
-        </div>
-
-        <div className="tc-handles">
-          {member.handles.map(h => (
-            <a key={h.label} href={h.url} target="_blank" rel="noreferrer">
-              {h.label.toUpperCase()} ↗
-            </a>
-          ))}
-        </div>
-      </div>
-    </div>
+    <span className="status-dot-wrap">
+      <span className="status-dot" style={{ background: meta.color }} />
+      <span className="status-label mono">{meta.label}</span>
+    </span>
   )
 }
 
 export default function About(){
+  const [selectedId, setSelectedId] = useState(TEAM[0]?.id ?? null)
+  const selected = TEAM.find(m => m.id === selectedId)
+
   return (
     <>
       <section className="about-hero">
         <p className="eyebrow mono">THE ROSTER</p>
         <h1>Meet the team<br />behind the models.</h1>
-        <p>
-          Engineers, not mascots. Stats are earned, weaknesses are real, and
-          every one of us picks up sessions with students.
-        </p>
+        <p>Engineers, not mascots. Select someone below to see their focus, availability, and how to reach them.</p>
       </section>
 
-      <section className="team-grid">
-        {TEAM.map(member => (
-          <TeamCard key={member.id} member={member} />
-        ))}
+      <section className="team-selector">
+        <div className="team-list">
+          {TEAM.map(member => (
+            <button
+              key={member.id}
+              className={`team-list-item ${member.id === selectedId ? 'active' : ''}`}
+              onClick={() => setSelectedId(member.id)}
+              type="button"
+            >
+              <span className="tli-photo">
+                <img src={member.photo} alt="" />
+                <span className="tli-dot" style={{ background: STATUS_META[member.status].color }} />
+              </span>
+              <span className="tli-text">
+                <span className="tli-name">{member.name}</span>
+                <span className="tli-role">{member.role}</span>
+              </span>
+            </button>
+          ))}
+        </div>
+
+        {selected && (
+          <div className="team-detail">
+            <div className="td-photo">
+              <img src={selected.photo} alt={selected.name} />
+            </div>
+            <div className="td-body">
+              <StatusDot status={selected.status} />
+              <h2 className="td-name">{selected.name}</h2>
+              <p className="td-role">{selected.role}</p>
+
+              <div className="td-specialties">
+                {selected.specialties.map(s => <span key={s} className="td-chip">{s}</span>)}
+              </div>
+
+              <div className="td-contact">
+                <a href={selected.linkedin} target="_blank" rel="noreferrer" className="td-contact-link">
+                  <span className="mono">LinkedIn</span>
+                  <span className="td-contact-value">{selected.linkedin.replace('https://www.', '')}</span>
+                </a>
+                <a href={`mailto:${selected.email}`} className="td-contact-link">
+                  <span className="mono">Email</span>
+                  <span className="td-contact-value">{selected.email}</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        )}
       </section>
 
       <section className="about-body-band">
         <h2>We mentor as much as we build.</h2>
         <div className="copy">
-          <p>
-            Forge &amp; Frame started as a way to make real CAD, CFD, and CAE
-            practice accessible outside the classroom. Every project we ship
-            feeds back into how we teach — and every mentorship session
-            sharpens how we build.
-          </p>
-          <p>
-            If your mesh is failing and your deadline isn&apos;t moving, the
-            team above is who shows up.
-          </p>
+          <p>Forge &amp; Frame started as a way to make real CAD, CFD, and CAE practice accessible outside the classroom. Every project we ship feeds back into how we teach — and every mentorship session sharpens how we build.</p>
+          <p>If your mesh is failing and your deadline isn&apos;t moving, the team above is who shows up.</p>
         </div>
       </section>
     </>

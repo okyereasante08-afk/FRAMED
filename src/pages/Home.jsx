@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom'
-import Hero3D from '../components/Hero3D.jsx'
+import HeroVisual from '../components/HeroVisual.jsx'
 import Tracks from '../components/Tracks.jsx'
 import './Home.css'
 
 export default function Home(){
   return (
-    <>
+    <div>
       <section className="hero">
         <div className="hero-left">
           <p className="eyebrow mono">Product design engineering — CAD / CFD / CAE</p>
@@ -20,15 +20,12 @@ export default function Home(){
             <Link to="/contact" className="btn ghost">Start a project</Link>
           </div>
         </div>
-
-        <Hero3D />
+        <HeroVisual />
       </section>
 
       <div className="brand-strip">
         <span className="company">© Forge &amp; Frame — Design office, est. Ghana</span>
-        <Link to="/projects" className="work-card">
-          View our work <span className="arrow">→</span>
-        </Link>
+        <Link to="/projects" className="work-card">View our work <span className="arrow">→</span></Link>
       </div>
 
       <Tracks />
@@ -46,11 +43,12 @@ export default function Home(){
         <h2>Let&apos;s build something that<br />actually <span className="baseline">holds up.</span></h2>
         <div className="close-links">
           <Link to="/projects"><span className="baseline">Projects</span> →</Link>
+          <Link to="/fields"><span className="baseline">Fields</span> →</Link>
           <Link to="/about"><span className="baseline">The team</span> →</Link>
           <Link to="/student-help"><span className="baseline">Student deadline?</span> →</Link>
           <Link to="/contact"><span className="baseline">Start a project</span> →</Link>
         </div>
       </section>
-    </>
+    </div>
   )
 }

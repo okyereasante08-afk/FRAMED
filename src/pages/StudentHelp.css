@@ -1,240 +1,57 @@
-.sh-hero{
-  position:relative;
-  padding:150px 56px 70px;
-  overflow:hidden;
-}
-.sh-siren{
-  position:absolute; top:24px; right:56px;
-  display:flex; align-items:center; gap:10px;
-  font-family:'JetBrains Mono', monospace;
-  font-size:11px;
-  letter-spacing:0.06em;
-  color:var(--accent);
-  background:var(--accent-tint);
-  padding:8px 16px;
-  border-radius:100px;
-}
-.sh-siren .dot{
-  width:8px; height:8px; border-radius:50%;
-  background:var(--accent);
-  animation:sirenPulse 1s ease-in-out infinite;
-}
-@keyframes sirenPulse{ 0%,100%{ opacity:1; box-shadow:0 0 0 0 rgba(122,46,61,0.4); } 50%{ opacity:0.4; box-shadow:0 0 0 6px rgba(122,46,61,0); } }
-
-.sh-eyebrow{
-  font-family:'JetBrains Mono', monospace;
-  font-size:12px;
-  letter-spacing:0.06em;
-  color:var(--accent);
-  margin-bottom:20px;
-  display:inline-flex; align-items:center; gap:10px;
-  padding:9px 18px;
-  border-radius:100px;
-  background:var(--accent-tint);
-}
-
-.sh-hook{
-  font-size:clamp(34px, 6vw, 68px);
-  max-width:16ch;
-  margin-bottom:8px;
-}
+.sh-hero{ padding:150px 56px 60px; }
+.sh-eyebrow{ font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--accent); margin-bottom:20px; display:inline-flex; padding:9px 18px; border-radius:100px; background:var(--accent-tint); }
+.sh-hook{ font-size:clamp(34px, 6vw, 68px); max-width:16ch; margin-bottom:8px; }
 .sh-hook .accent{ color:var(--accent); }
+.sh-subhook{ font-family:'Roboto', sans-serif; font-weight:300; font-size:18px; color:var(--ink-soft); max-width:56ch; margin-top:20px; line-height:1.6; }
 
-.sh-subhook{
-  font-family:'Roboto', sans-serif;
-  font-weight:300;
-  font-size:18px;
-  color:var(--ink-soft);
-  max-width:56ch;
-  margin-top:20px;
-  line-height:1.6;
-}
-.sh-subhook b{ color:var(--ink); font-weight:600; }
-
-.sh-cta-row{
-  margin-top:40px;
-  display:flex; gap:16px; align-items:center; flex-wrap:wrap;
-}
-.sh-cta-primary{
-  font-family:'Roboto', sans-serif;
-  font-weight:600;
-  font-size:15px;
-  padding:18px 36px;
-  background:var(--accent);
-  color:#fff;
-  border:none;
-  border-radius:100px;
-  cursor:pointer;
-  display:inline-flex; align-items:center; gap:12px;
-  box-shadow:6px 6px 14px var(--clay-shadow-dark), -6px -6px 14px var(--clay-shadow-light);
-  transition:background 0.25s ease, transform 0.2s ease;
-}
-.sh-cta-primary:hover{ background:var(--accent-deep); transform:translateY(-2px); }
-
-.sh-proof-row{
-  display:flex; gap:32px; flex-wrap:wrap;
-  margin-top:48px;
-  padding-top:28px;
-}
-.sh-proof-stat .num{ font-family:'Syne', sans-serif; font-weight:700; font-size:30px; color:var(--ink); }
-.sh-proof-stat .lbl{ font-family:'JetBrains Mono', monospace; font-size:10.5px; letter-spacing:0.04em; color:var(--steel-light); margin-top:4px; }
-
-/* Symptom checklist band -- makes the "purpose seem so clear" */
 .sh-symptoms{
-  margin:16px;
-  padding:64px 56px;
-  background:var(--tech-panel);
-  border-radius:32px;
-  color:#e8eef9;
+  margin:8px 56px 24px; padding:56px 48px; background:var(--tech-panel); border-radius:32px; color:#e8eef9;
 }
-.sh-symptoms h2{ font-size:clamp(24px, 3.4vw, 36px); max-width:20ch; margin-bottom:36px; color:#fff; }
-.symptom-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));
-  gap:16px;
-}
-.symptom-card{
-  background:var(--tech-panel-line);
-  border-radius:20px;
-  padding:26px;
-  display:flex; gap:14px; align-items:flex-start;
-}
-.symptom-card .mark{
-  font-family:'JetBrains Mono', monospace;
-  font-size:17px;
-  color:var(--cae-c);
-  flex-shrink:0;
-}
-.symptom-card p{
-  font-family:'Roboto', sans-serif;
-  font-weight:300;
-  font-size:14.5px;
-  color:#c2ccdf;
-  line-height:1.55;
-}
-.symptom-card b{ color:#fff; font-weight:500; }
+.sh-symptoms h2{ color:#fff; font-size:clamp(24px, 3.4vw, 34px); max-width:22ch; margin-bottom:32px; }
+.symptom-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:16px; }
+.symptom-card{ background:var(--tech-panel-line); border-radius:20px; padding:22px; display:flex; gap:14px; }
+.symptom-card .mark{ font-size:15px; color:#8ea6e0; flex-shrink:0; }
+.symptom-card p{ font-family:'Roboto', sans-serif; font-weight:300; font-size:14px; line-height:1.5; color:#cdd8ee; }
+.symptom-card b{ color:#fff; font-weight:600; }
 
-/* Tabs: emergency intake vs general student help */
-.sh-tabs{
-  display:flex;
-  gap:8px;
-  margin:24px 56px 0;
-  background:var(--clay-bg);
-  padding:6px;
-  border-radius:100px;
-  box-shadow:inset 3px 3px 8px var(--clay-shadow-dark);
-}
-.sh-tab{
-  flex:1;
-  font-family:'Roboto', sans-serif;
-  font-weight:600;
-  font-size:13.5px;
-  padding:16px 24px;
-  background:transparent;
-  border:none;
-  border-radius:100px;
-  color:var(--ink-soft);
-  cursor:pointer;
-  transition:background 0.25s ease, color 0.25s ease;
-}
-.sh-tab.active{ background:var(--clay-surface); color:var(--ink); box-shadow:4px 4px 10px var(--clay-shadow-dark), -4px -4px 10px var(--clay-shadow-light); }
-.sh-tab .tab-sub{ display:block; font-family:'Roboto', sans-serif; font-size:11px; margin-top:3px; opacity:0.65; font-weight:400; }
-
-/* Form section */
-.sh-form-section{ padding:48px 56px 100px; }
-.sh-form-wrap{
-  max-width:760px;
-  margin:0 auto;
-}
-.sh-form-head{ margin-bottom:44px; }
-.sh-form-head h2{ font-size:clamp(24px, 3.4vw, 34px); }
-.sh-form-head p{ margin-top:14px; color:var(--ink-soft); font-weight:300; max-width:56ch; line-height:1.6; }
-
+.sh-form-section{ padding:24px 56px 100px; }
+.sh-form-wrap{ max-width:760px; margin:0 auto; }
 .sh-form{ display:flex; flex-direction:column; gap:24px; }
 .sh-field{ display:flex; flex-direction:column; gap:8px; }
-.sh-field label{
-  font-family:'Roboto', sans-serif;
-  font-weight:500;
-  font-size:13px;
-  color:var(--ink-soft);
+.sh-field label{ font-family:'Roboto', sans-serif; font-weight:500; font-size:13px; color:var(--ink-soft); }
+.sh-field input, .sh-field textarea{
+  font-family:'Roboto', sans-serif; font-size:15px; padding:15px 18px; border:none; border-radius:16px;
+  background:var(--clay-bg); color:var(--ink); box-shadow:inset 3px 3px 8px var(--clay-shadow-dark), inset -3px -3px 8px var(--clay-shadow-light);
 }
-.sh-field label .req{ color:var(--accent); }
-.sh-field input,
-.sh-field select,
-.sh-field textarea{
-  font-family:'Roboto', sans-serif;
-  font-size:15px;
-  padding:15px 18px;
-  border:none;
-  border-radius:16px;
-  background:var(--clay-bg);
-  color:var(--ink);
-  box-shadow:inset 3px 3px 8px var(--clay-shadow-dark), inset -3px -3px 8px var(--clay-shadow-light);
+.sh-field input:focus-visible, .sh-field textarea:focus-visible{
+  outline:2px solid var(--primary); outline-offset:2px;
 }
-.sh-field input:focus,
-.sh-field select:focus,
-.sh-field textarea:focus{
-  outline:2px solid var(--primary);
-  outline-offset:1px;
-}
-.sh-field textarea{ resize:vertical; min-height:110px; }
-.sh-field .err{ font-family:'Roboto', sans-serif; font-size:12px; color:var(--accent); }
-.sh-field.has-error input,
-.sh-field.has-error select,
-.sh-field.has-error textarea{ outline:2px solid var(--accent); }
-
-.sh-row-2{ display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+.sh-field textarea{ min-height:110px; resize:vertical; }
+.sh-field .err{ font-size:12px; color:var(--accent); font-family:'Roboto', sans-serif; }
 
 .urgency-picker{ display:flex; gap:10px; flex-wrap:wrap; }
 .urgency-opt{
-  flex:1; min-width:140px;
-  padding:16px;
-  border-radius:18px;
-  background:var(--clay-bg);
+  flex:1; min-width:140px; padding:16px; border-radius:18px; background:var(--clay-bg);
   box-shadow:3px 3px 8px var(--clay-shadow-dark), -3px -3px 8px var(--clay-shadow-light);
-  cursor:pointer;
-  text-align:center;
-  transition:all 0.2s ease;
+  cursor:pointer; text-align:center; transition:all 0.2s ease;
 }
-.urgency-opt .lvl{ font-family:'Syne', sans-serif; font-weight:700; font-size:14.5px; }
-.urgency-opt .desc{ font-family:'JetBrains Mono', monospace; font-size:10px; letter-spacing:0.02em; margin-top:4px; color:var(--steel-light); }
+.urgency-opt:focus-visible{
+  outline:2px solid var(--primary); outline-offset:2px;
+}
+.urgency-opt .lvl{ font-family:'Libre Baskerville', serif; font-weight:700; font-size:14.5px; }
+.urgency-opt .desc{ font-family:'JetBrains Mono', monospace; font-size:10px; margin-top:4px; color:var(--steel-light); }
 .urgency-opt.selected{ background:var(--primary); color:#fff; box-shadow:none; }
-.urgency-opt.selected.critical{ background:var(--accent); }
 .urgency-opt.selected .desc{ color:rgba(255,255,255,0.7); }
 
 .sh-submit{
-  font-family:'Roboto', sans-serif;
-  font-weight:600;
-  font-size:15px;
-  padding:18px 36px;
-  background:var(--primary);
-  color:#fff;
-  border:none;
-  border-radius:100px;
-  cursor:pointer;
-  margin-top:8px;
-  box-shadow:6px 6px 14px var(--clay-shadow-dark), -6px -6px 14px var(--clay-shadow-light);
-  transition:background 0.25s ease, transform 0.2s ease;
+  font-family:'Roboto', sans-serif; font-weight:600; font-size:15px; padding:18px 36px; background:var(--primary);
+  color:#fff; border:none; border-radius:100px; cursor:pointer; box-shadow:6px 6px 14px var(--clay-shadow-dark), -6px -6px 14px var(--clay-shadow-light);
 }
-.sh-submit:hover{ background:var(--primary-deep); transform:translateY(-2px); }
-.sh-submit:disabled{ opacity:0.5; cursor:not-allowed; transform:none; }
-
-.sh-success{
-  padding:48px;
-  background:var(--clay-surface);
-  border-radius:28px;
-  text-align:center;
-  box-shadow:9px 9px 18px var(--clay-shadow-dark), -9px -9px 18px var(--clay-shadow-light);
-}
-.sh-success .mark{ font-size:38px; margin-bottom:16px; color:var(--primary); }
-.sh-success h3{ font-size:22px; margin-bottom:12px; }
-.sh-success p{ color:var(--ink-soft); font-weight:300; max-width:44ch; margin:0 auto; line-height:1.6; }
+.sh-success{ padding:48px; background:var(--clay-surface); border-radius:28px; text-align:center; box-shadow:9px 9px 18px var(--clay-shadow-dark), -9px -9px 18px var(--clay-shadow-light); }
+.sh-success .mark{ font-size:38px; color:var(--primary); margin-bottom:16px; }
 
 @media (max-width:900px){
-  .sh-hero{ padding:130px 20px 48px; }
-  .sh-symptoms{ margin:12px; padding:48px 20px; }
-  .sh-tabs{ margin:20px 20px 0; }
-  .sh-form-section{ padding:32px 20px 64px; }
-  .sh-row-2{ grid-template-columns:1fr; }
-  .sh-siren{ position:static; margin-bottom:24px; display:inline-flex; }
+  .sh-hero{ padding:130px 20px 40px; }
+  .sh-symptoms{ margin:8px 16px 16px; padding:40px 24px; }
+  .sh-form-section{ padding:16px 20px 64px; }
 }

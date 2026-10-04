@@ -5,12 +5,10 @@
   padding:14px 28px;
   background:var(--clay-surface);
   border-radius:100px;
-  box-shadow:
-    8px 8px 18px var(--clay-shadow-dark),
-    -8px -8px 18px var(--clay-shadow-light);
+  box-shadow:8px 8px 18px var(--clay-shadow-dark), -8px -8px 18px var(--clay-shadow-light);
 }
 .logo-mark{
-  font-family:'Syne', sans-serif;
+  font-family:'Libre Baskerville', serif;
   font-weight:700;
   font-size:19px;
   color:var(--ink);
@@ -20,25 +18,19 @@
 }
 .logo-mark .dot{ width:8px; height:8px; background:var(--accent); border-radius:50%; }
 
-.site-header nav{ display:flex; gap:8px; align-items:center; }
+.site-header nav{ display:flex; gap:6px; align-items:center; }
 .site-header nav a{
   color:var(--ink-soft);
   text-decoration:none;
   font-family:'Roboto', sans-serif;
   font-weight:500;
   font-size:13.5px;
-  padding:9px 18px;
+  padding:9px 16px;
   border-radius:100px;
   transition:background 0.25s ease, color 0.25s ease;
 }
-.site-header nav a:hover{
-  background:var(--clay-bg);
-  color:var(--ink);
-}
-.site-header nav a.active{
-  background:var(--primary);
-  color:#fff;
-}
+.site-header nav a:hover{ background:var(--clay-bg); color:var(--ink); }
+.site-header nav a.active{ background:var(--primary); color:#fff; }
 
 .nav-toggle{
   display:none;
@@ -46,28 +38,41 @@
   color:var(--ink);
   font-family:'JetBrains Mono', monospace;
   font-size:13px;
-  letter-spacing:0.1em;
   cursor:pointer;
   padding:8px 14px;
   border-radius:100px;
+  /* Must render above the mobile drawer (nav.open below is also
+     position:fixed with no z-index, which per CSS stacking rules
+     would otherwise render on top purely by DOM order -- verified
+     via MDN: "without z-index, elements stack in HTML hierarchy
+     order" -- silently making the Close button unclickable once the
+     drawer was open. */
+  position:relative;
+  z-index:1002;
+}
+
+/* Intermediate breakpoint: tightens nav spacing before the full mobile
+   drawer takes over at 900px. With 5 nav links (About, Projects,
+   Fields, Student Help, Contact), "Student Help" is long enough that
+   the full-padding desktop nav risks crowding or wrapping awkwardly
+   on tablet-width screens just above the 900px cutoff. */
+@media (max-width:1100px){
+  .site-header nav{ gap:2px; }
+  .site-header nav a{ padding:9px 12px; font-size:12.5px; }
 }
 
 @media (max-width:900px){
   .site-header{ top:14px; left:14px; right:14px; padding:12px 20px; }
   .site-header nav{
-    position:fixed;
-    top:0; right:0;
-    height:100vh;
+    position:fixed; top:0; right:0; height:100vh;
     width:min(78vw, 320px);
     background:var(--clay-surface);
-    flex-direction:column;
-    justify-content:center;
-    align-items:flex-start;
-    gap:14px;
-    padding:0 32px;
+    flex-direction:column; justify-content:center; align-items:flex-start;
+    gap:14px; padding:0 32px;
     transform:translateX(100%);
     transition:transform 0.4s cubic-bezier(.19,1,.22,1);
     box-shadow:-12px 0 30px rgba(169,188,220,0.4);
+    z-index:1001;
   }
   .site-header nav.open{ transform:translateX(0); }
   .site-header nav a{ width:100%; padding:14px 18px; font-size:15px; }

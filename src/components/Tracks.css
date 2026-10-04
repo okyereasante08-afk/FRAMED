@@ -2,113 +2,33 @@
   display:grid;
   grid-template-columns:repeat(3, 1fr);
   gap:16px;
-  min-height:74vh;
+  min-height:60vh;
   padding:0 16px;
 }
 .track{
   position:relative;
   display:flex; flex-direction:column; justify-content:flex-end;
   padding:36px;
-  overflow:hidden;
   cursor:pointer;
   background:var(--clay-surface);
   border-radius:28px;
-  box-shadow:
-    9px 9px 18px var(--clay-shadow-dark),
-    -9px -9px 18px var(--clay-shadow-light);
-  transition:background 0.6s ease, box-shadow 0.3s ease;
+  box-shadow:9px 9px 18px var(--clay-shadow-dark), -9px -9px 18px var(--clay-shadow-light);
+  transition:box-shadow 0.25s ease, transform 0.25s ease;
   text-decoration:none;
 }
 .track:hover{
-  box-shadow:
-    12px 12px 24px var(--clay-shadow-darker),
-    -9px -9px 18px var(--clay-shadow-light);
+  box-shadow:12px 12px 24px var(--clay-shadow-darker), -9px -9px 18px var(--clay-shadow-light);
+  transform:translateY(-4px);
 }
+.track:active{ transform:translateY(-1px); }
 
-.track-num{
-  font-family:'JetBrains Mono', monospace;
-  font-size:12px;
-  letter-spacing:0.06em;
-  color:var(--steel-light);
-  position:absolute; top:32px; left:32px;
-  z-index:3;
-  transition:color 0.6s ease;
-}
-.track-tag{
-  font-family:'JetBrains Mono', monospace;
-  font-size:11px;
-  letter-spacing:0.06em;
-  position:absolute; top:32px; right:32px;
-  z-index:3;
-  padding:6px 14px;
-  border-radius:100px;
-  background:var(--clay-bg);
-  color:var(--steel);
-  transition:all 0.6s ease;
-}
-.track-title{
-  font-size:clamp(26px, 3vw, 38px);
-  position:relative; z-index:3;
-  transition:color 0.6s ease;
-}
-.track-sub{
-  font-family:'Roboto', sans-serif;
-  font-weight:300;
-  font-size:14.5px;
-  max-width:30ch;
-  margin-top:12px;
-  line-height:1.55;
-  color:var(--ink-soft);
-  position:relative; z-index:3;
-  transition:color 0.6s ease;
-}
-.track-full{
-  font-family:'Roboto', sans-serif;
-  font-weight:600;
-  font-size:13px;
-  margin-top:22px;
-  display:flex; align-items:center; gap:8px;
-  position:relative; z-index:3;
-  color:var(--primary);
-  transition:color 0.6s ease;
-}
-
-/* Active/hover state: all three tracks share the same dark technical
-   panel treatment (rather than three separate near-black shades as
-   before) since --tech-panel is now the one consistent "technical
-   moment" surface in the identity. The per-track accent color (from
-   the blue/burgundy family) still differentiates them via the tag
-   pill and title color. */
-.track.active{
-  background:var(--tech-panel);
-  box-shadow:
-    9px 9px 18px var(--clay-shadow-dark),
-    -9px -9px 18px var(--clay-shadow-light);
-}
-.track.active .track-num{ color:#8a9ac2; }
-.track.active .track-sub{ color:#a8b5d6; }
-.track.active .track-full{ color:#fff; }
-
-.track.cad.active .track-title{ color:var(--cad-c); }
-.track.cad.active .track-tag{ background:var(--tech-panel-line); color:var(--cad-c); }
-
-.track.cfd.active .track-title{ color:var(--cfd-c); }
-.track.cfd.active .track-tag{ background:var(--tech-panel-line); color:#7d9aeb; }
-
-.track.cae.active .track-title{ color:var(--cae-c); }
-.track.cae.active .track-tag{ background:var(--tech-panel-line); color:#d68a99; }
-
-/* live 3D canvases (CAD assembly, CFD nozzle, CAE drag plane) -- mounted
-   only while the tile is active, so this fades in on mount rather than
-   toggling via a hover-driven opacity switch on an always-present
-   element */
-.track-3d{
-  position:absolute; inset:0; z-index:1;
-  animation:tile3dFadeIn 0.45s ease forwards;
-}
-@keyframes tile3dFadeIn{ from{ opacity:0; } to{ opacity:1; } }
+.track-num{ font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--steel-light); position:absolute; top:32px; left:32px; }
+.track-tag{ font-family:'JetBrains Mono', monospace; font-size:11px; position:absolute; top:32px; right:32px; padding:6px 14px; border-radius:100px; background:var(--primary-tint); color:var(--primary-deep); }
+.track-title{ font-size:clamp(26px, 3vw, 38px); }
+.track-sub{ font-family:'Roboto', sans-serif; font-weight:300; font-size:14.5px; max-width:30ch; margin-top:12px; line-height:1.55; color:var(--ink-soft); }
+.track-full{ font-family:'Roboto', sans-serif; font-weight:600; font-size:13px; margin-top:22px; display:flex; align-items:center; gap:8px; color:var(--primary); }
 
 @media (max-width:900px){
   .tracks{ grid-template-columns:1fr; gap:16px; }
-  .track{ min-height:44vh; }
+  .track{ min-height:auto; padding:28px; }
 }

@@ -1,0 +1,76 @@
+.hero-visual{
+  position:relative;
+  border-radius:32px;
+  margin:16px 16px 16px 8px;
+  overflow:hidden;
+  background:var(--clay-bg-deep);
+  box-shadow:inset 6px 6px 16px var(--clay-shadow-dark), inset -6px -6px 16px var(--clay-shadow-light);
+  min-height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:40px;
+}
+
+/* Subtle blueprint-grid backdrop -- pure CSS gradient, no image request */
+.hv-grid{
+  position:absolute; inset:0;
+  background-image:
+    linear-gradient(var(--clay-shadow-dark) 1px, transparent 1px),
+    linear-gradient(90deg, var(--clay-shadow-dark) 1px, transparent 1px);
+  background-size:40px 40px;
+  opacity:0.25;
+}
+
+.hv-card{
+  position:relative;
+  z-index:2;
+  width:230px;
+  background:var(--clay-surface);
+  border-radius:20px;
+  padding:24px;
+  box-shadow:8px 8px 18px var(--clay-shadow-dark), -8px -8px 18px var(--clay-shadow-light);
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  /* GPU-composited (transform + opacity only) gentle float -- cheap
+     even running continuously, and already paused site-wide for
+     prefers-reduced-motion via the rule in global.css */
+  animation:hvFloat 6s ease-in-out infinite;
+}
+.hv-card-a{ transform:translate(-90px, -70px) rotate(-4deg); animation-delay:0s; }
+.hv-card-b{ transform:translate(20px, 10px) rotate(2deg); z-index:3; animation-delay:0.7s; }
+.hv-card-c{ transform:translate(110px, -40px) rotate(-2deg); animation-delay:1.4s; }
+
+@keyframes hvFloat{
+  0%, 100%{ translate:0 0; }
+  50%{ translate:0 -8px; }
+}
+
+.hv-tag{
+  font-size:11px;
+  color:var(--primary);
+  background:var(--primary-tint);
+  padding:6px 14px;
+  border-radius:100px;
+  width:fit-content;
+}
+.hv-label{
+  font-family:'Roboto', sans-serif;
+  font-weight:500;
+  font-size:14px;
+  color:var(--ink-soft);
+  line-height:1.4;
+}
+
+@media (max-width:900px){
+  .hero-visual{ margin:0 16px 16px; min-height:44vh; padding:20px; }
+  .hv-card{ width:150px; padding:14px; }
+  .hv-card-a{ transform:translate(-36px, -46px) rotate(-4deg); }
+  .hv-card-b{ transform:translate(6px, 0) rotate(2deg); }
+  .hv-card-c{ transform:translate(42px, -28px) rotate(-2deg); }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .hv-card{ animation:none; }
+}

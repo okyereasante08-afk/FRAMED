@@ -5,6 +5,7 @@ import './styles/global.css'
 import App from './App.jsx'
 import Home from './pages/Home.jsx'
 import Projects from './pages/Projects.jsx'
+import Fields from './pages/Fields.jsx'
 import About from './pages/About.jsx'
 import Contact from './pages/Contact.jsx'
 import StudentHelp from './pages/StudentHelp.jsx'
@@ -16,6 +17,8 @@ createRoot(document.getElementById('root')).render(
         <Route element={<App />}>
           <Route index element={<Home />} />
           <Route path="projects" element={<Projects />} />
+          <Route path="fields" element={<Fields />} />
+          <Route path="fields/:fieldId" element={<Fields />} />
           <Route path="about" element={<About />} />
           <Route path="contact" element={<Contact />} />
           <Route path="student-help" element={<StudentHelp />} />
