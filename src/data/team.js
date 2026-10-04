@@ -15,7 +15,7 @@ export const TEAM = [
   {
     id: 'josephkerry-kwadzokpo',
     name: 'Josephkerry (Edinam) Kwadzokpo',
-    role: 'Aspiring Biomedical Engineer',
+    role: 'Biomedical Engineer',
     specialties: ['EDA/PCB Design', 'CAD', 'Research & Development'],
     photo: '/team/jkerry.jpg',
     status: 'open-to-work',
